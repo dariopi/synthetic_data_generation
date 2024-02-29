@@ -12,7 +12,7 @@ This repository contains the code for generating synthetic data for training a D
 
 # Main files 
 
-* [train_dynoNet.py](train_dynoNet.py): Contains the code for training the DynoNet model using synthetic data generated from a predefined system.
+* [main_train.py](main_train.py): Contains the code for training the DynoNet model using synthetic data generated from a predefined system.
 Training Process
 
 * [plot.py](plot.py): Contain the code for generating plots
