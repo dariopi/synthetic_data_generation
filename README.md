@@ -2,6 +2,10 @@
 
 This repository contains the code for generating synthetic data for training a DynoNet model as described in the paper: "Synthetic data generation for system identification: leveraging knowledge transfer from similar systems" by Dario Piga, Matteo Rufolo, Gabriele Maroni, Manas Mejari, Marco Forgione.
 
+# Disclaimer
+
+This code is released as-is, without any guarantees. It is primarily intended to replicate the results reported in our paper. Users are welcome to use and modify the code, but please note that it may not follow the best practices for optimizing algorithm execution. Furthermore, the code might not adhere to the best programming practices in Python, as our main goal was to illustrate the concepts and methodologies described in the paper. Use this code at your own risk.
+
 # Requirements
 
 *   Python 3.x
@@ -21,12 +25,6 @@ Training Process
 
 While all the scripts can run on CPU, execution may be slow. For faster training, a GPU is highly recommended.
 To run the paper's examples, we used a server equipped with an nVidia RTX 3090 GPU.
-
-
-# Disclaimer
-
-This code is released as-is, without any guarantees. It is primarily intended to replicate the results reported in our paper. Users are welcome to use and modify the code, but please note that it may not follow the best practices for optimizing algorithm execution. Furthermore, the code might not adhere to the best programming practices in Python, as our main goal was to illustrate the concepts and methodologies described in the paper. Use this code at your own risk.
-
 
 # License
 
