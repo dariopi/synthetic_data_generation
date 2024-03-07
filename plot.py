@@ -2,12 +2,12 @@ import numpy as np
 import pickle
 import os
 import matplotlib.pyplot as plt
-plt.rcParams['text.usetex'] = True
-plt.rcParams["font.family"] = "Times New Roman"
-plt.rcParams['font.size'] = 10
+#plt.rcParams['text.usetex'] = True
+#plt.rcParams["font.family"] = "Times New Roman"
+#plt.rcParams['font.size'] = 10
 
 folder_name = 'saved_data'
-filename = '2024-02-28_20-07-17data_to_save'
+filename = '2024-03-04_05-17-12data_to_save' # 2024-02-28_20-07-17data_to_save'
 file_path = os.path.join(folder_name, filename)
 
 
@@ -32,7 +32,7 @@ for box in axes.boxplot(test_r2_best, positions=[1], widths=0.6, labels=['with\n
 
 axes.grid(True, which='both', axis='y', linestyle='--', linewidth=0.5)
 axes.set_ylabel('$R^2$ index')
-axes.set_ylim(-0.1, 1.1)
+axes.set_ylim(-0.02, 1.02)
 
 
 plt.tight_layout()
@@ -54,10 +54,10 @@ for i, gamma in enumerate(gamma_values):
 axes.grid(True, which='both', axis='y', linestyle='--', linewidth=0.5)
 axes.set_xlabel('$\gamma$')
 axes.set_ylabel('MSE')
-axes.set_ylim(-0.1, 20)
+axes.set_ylim(0.5, 4)
 axes.set_title('MSE on Validation data', fontsize = 8)
 
-plt.ylim(-0.1, 10)
+
 plt.tight_layout()
 
 # Save the figure again with the new specifications
@@ -80,10 +80,10 @@ for i, gamma in enumerate(gamma_values):
 axes.grid(True, which='both', axis='y', linestyle='--', linewidth=0.5)
 axes.set_xlabel('$\gamma$')
 axes.set_ylabel('MSE')
-axes.set_ylim(-0.1, 20)
+axes.set_ylim(0.5, 4)
 axes.set_title('MSE on Training data', fontsize = 8)
 
-plt.ylim(-0.1, 10)
+#plt.ylim(0.5, 3)
 
 plt.tight_layout()
 

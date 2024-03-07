@@ -89,11 +89,19 @@ def train_dynoNet(data_train=None, tG_dl=None, data_val=None, data_test=None, si
     for gamma in gamma_list:
 
         # Creating DynoNet model components
-        nb_1, na_1 = 15, 15  # Parameters for the first linear section
-        G1 = MimoLinearDynamicalOperator(nu, 10, n_b=nb_1, n_a=na_1)
-        F_nl = MimoStaticNonLinearity(10, 10, n_hidden=15)  # Non-linear section
-        nb_2, na_2 = 15, 15  # Parameters for the second linear section
-        G2 = MimoLinearDynamicalOperator(10, ny, n_b=nb_2, n_a=na_2)
+        #nb_1, na_1 = 15, 15  # Parameters for the first linear section
+        #G1 = MimoLinearDynamicalOperator(nu, 10, n_b=nb_1, n_a=na_1)
+        #F_nl = MimoStaticNonLinearity(10, 10, n_hidden=15)  # Non-linear section
+        #nb_2, na_2 = 15, 15  # Parameters for the second linear section
+        #G2 = MimoLinearDynamicalOperator(10, ny, n_b=nb_2, n_a=na_2)
+
+
+        # Creating DynoNet model components
+        nb_1, na_1 = 10, 10  # Parameters for the first linear section
+        G1 = MimoLinearDynamicalOperator(nu, 1, n_b=nb_1, n_a=na_1)
+        F_nl = MimoStaticNonLinearity(1, 1, n_hidden=32)  # Non-linear section
+        nb_2, na_2 = 10, 10  # Parameters for the second linear section
+        G2 = MimoLinearDynamicalOperator(1, ny, n_b=nb_2, n_a=na_2)
 
         # Initial conditions for DynoNet LTI blocks
         y0_1, u0_1 = torch.zeros((batch_size, na_1), dtype=torch.float), torch.zeros((batch_size, nb_1),
@@ -209,21 +217,21 @@ def train_dynoNet(data_train=None, tG_dl=None, data_val=None, data_test=None, si
 if __name__ == '__main__':
     # Setting up basic parameters for data generation and training
     batch_size = 1
-    ctx_len = 400  # Context length
-    len_sim = 100  # Length of synthetic trajectory
-    val_len = 200  # Length of validation dataset
+    ctx_len = 250  # Context length
+    len_sim = 200  # Length of synthetic trajectory
+    val_len = 100  # Length of validation dataset
     test_len = 4000  # Length of test dataset
     nu, ny = 1, 1  # Dimensions of input and output
     nin = 50  # Number of initial steps to discard
-    sigmay_train = 0.2  # Standard deviation of noise in training data
+    sigmay_train = 0.35  # Standard deviation of noise in training data
     n_MC = 100 # number of Monte Carlo runs
 
     # Define gamma values for regularization
-    gamma_list =  [0,  1, 10, 20, 30, 40, 50,  100, 200]
+    gamma_list =  [0,  0.1, 1, 10, 20, 30, 50,  100, 200] # [0, 0.5,  1, 10, 25]
 
     # Training hyperparameters
     lr = 1e-3
-    epochs = 6001
+    epochs = 8001
     msg_print = 3000  # Frequency of printing training progress
 
 
@@ -257,7 +265,7 @@ if __name__ == '__main__':
 
     # Loading pre-trained model
     out_dir = Path(out_dir)
-    exp_data = torch.load(out_dir / "ckpt_sim_wh_1000_pre.pt", map_location=device)
+    exp_data = torch.load(out_dir / "ckpt_sim_wh_1000_pre_final.pt", map_location=device)
     cfg = exp_data["cfg"]
 
     # Handling potential missing attribute in configuration
@@ -277,7 +285,7 @@ if __name__ == '__main__':
         # Data generation for the system
         # Generate input data and initialize datasets
         my_u = np.random.randn(ctx_len + val_len + test_len + 200, 1)  # Extra 200 samples for initialization
-        my_u[:200, :] = 0  # Zeroing first 200 samples
+        my_u[:200, :] = 0  # Zeroing first 400 samples
         test_ds = WHDataset(nx=10, nu=1, ny=1, seq_len=ctx_len + val_len + test_len + 200, fixed_system=True, system_seed=system_seed, u=my_u)
         test_dl = DataLoader(test_ds, batch_size=1, num_workers=0)
         batch_y, batch_u = next(iter(test_dl))
@@ -291,7 +299,7 @@ if __name__ == '__main__':
         y_t = y_t.to(device)
         data_train = {'u': u_t, 'y': y_t}
         SNR = torch.norm(y_t)**2/torch.norm(y_noise)**2
-        print(SNR.item())
+        print(f"SNR: {SNR.item(): .1f} db")
 
 
         # Validation data with added noise
