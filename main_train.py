@@ -89,14 +89,6 @@ def train_dynoNet(data_train=None, tG_dl=None, data_val=None, data_test=None, si
     for gamma in gamma_list:
 
         # Creating DynoNet model components
-        #nb_1, na_1 = 15, 15  # Parameters for the first linear section
-        #G1 = MimoLinearDynamicalOperator(nu, 10, n_b=nb_1, n_a=na_1)
-        #F_nl = MimoStaticNonLinearity(10, 10, n_hidden=15)  # Non-linear section
-        #nb_2, na_2 = 15, 15  # Parameters for the second linear section
-        #G2 = MimoLinearDynamicalOperator(10, ny, n_b=nb_2, n_a=na_2)
-
-
-        # Creating DynoNet model components
         nb_1, na_1 = 10, 10  # Parameters for the first linear section
         G1 = MimoLinearDynamicalOperator(nu, 1, n_b=nb_1, n_a=na_1)
         F_nl = MimoStaticNonLinearity(1, 1, n_hidden=32)  # Non-linear section
