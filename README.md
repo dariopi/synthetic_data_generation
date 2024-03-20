@@ -29,3 +29,11 @@ To run the paper's examples, we used a server equipped with an nVidia RTX 3090 G
 # License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+# Citing
+
+If you find this project useful, we encourage you to:
+
+* Star this repository :star: 
+
+* Cite the [paper](https://arxiv.org/html/2403.05164v1) 
