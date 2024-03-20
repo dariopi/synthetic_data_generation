@@ -36,4 +36,12 @@ If you find this project useful, we encourage you to:
 
 * Star this repository :star: 
 
-* Cite the [paper](https://arxiv.org/html/2403.05164v1) 
+* Cite the [paper](https://arxiv.org/html/2403.05164v1)
+```
+@article{piga2024synthetic,
+  title={Synthetic data generation for system identification: leveraging knowledge transfer from similar systems},
+  author={Piga, Dario and Rufolo, Matteo and Maroni, Gabriele and Mejari, Manas and Forgione, Marco},
+  journal={arXiv preprint arXiv:2403.05164},
+  year={2024}
+}
+```
